@@ -4,17 +4,62 @@
 use [Property24];
 select * from [dbo].[Property_DATA];
 --2. How many properties are listed in each province?
+select * from [dbo].[Property_DATA];
+SELECT Province,  COUNT(*) AS total_properties
+FROM Property_DATA
+GROUP BY Province;  
 --3. How many properties are listed in each city?
+select * from [dbo].[Property_DATA];
+SELECT city, COUNT(*) AS properties
+FROM Property_DATA
+GROUP BY city;
 --4. How many properties have more than 2 bedrooms?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(*) AS total_properties
+FROM  Property_DATA
+WHERE BEDROOMS > 2;
 --5. How many properties have 2 or more bathrooms?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(*) AS PropertiesWithManyBathrooms
+FROM Property_DATA
+WHERE bathrooms >= 2;
 --6. How many properties have parking for at least 2 cars?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(*) AS Parking
+FROM Property_DATA 
+WHERE parking >= 2;
 --7. How many properties are priced above R3,000,000?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(property_id) AS ExpensiveProperties
+FROM Property_DATA 
+WHERE Property_price > 3000000;
 --8. How many properties are in Gauteng?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(*) AS TotalProperties
+FROM Property_DATA
+WHERE Province = 'Gauteng';
 --9. How many properties per province have floor size greater than 200?
+select * from [dbo].[Property_DATA];
+SELECT Province,COUNT(*) AS NumberOfProperties
+FROM Property_DATA
+WHERE Floor_Size > 200
+GROUP BY Province;
 --10. How many distinct provinces are in the table?
+select * from [dbo].[Property_DATA];
+SELECT COUNT(DISTINCT province) 
+AS unique_province_count
+FROM Property_DATA;
 --SECTION 2 – SUM Aggregations (10 Questions)
 --11. What is the total value of all properties combined?
+SELECT SUM(property_value) AS TotalValue,
+FROM Property_DATA;
+
 --12. What is the total property value per province?
+SELECT province, SUM(property_value) AS total_value,
+COUNT(property_id) AS number_of_properties
+FROM Property_DATA]
+GROUP BY province;
+
 --13. What is the total property value per city?
 --14. What is the total monthly repayment for all properties?
 --15. What is the total monthly repayment per province?
