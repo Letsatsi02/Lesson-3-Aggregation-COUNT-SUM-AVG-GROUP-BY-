@@ -51,33 +51,101 @@ AS unique_province_count
 FROM Property_DATA;
 --SECTION 2 – SUM Aggregations (10 Questions)
 --11. What is the total value of all properties combined?
-SELECT SUM(property_value) AS TotalValue,
-FROM Property_DATA;
-
+select * from [dbo].[Property_DATA];
+SELECT SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS TotalValue
+FROM [dbo].[Property_DATA];
 --12. What is the total property value per province?
-SELECT province, SUM(property_value) AS total_value,
-COUNT(property_id) AS number_of_properties
-FROM Property_DATA]
-GROUP BY province;
-
+select * from [dbo].[Property_DATA];
+SELECT PROVINCE, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS TotalPropertyValue
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY TotalPropertyValue DESC;
 --13. What is the total property value per city?
+SELECT CITY, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS TotalPropertyValue
+FROM [dbo].[Property_DATA]
+GROUP BY CITY
+ORDER BY TotalPropertyValue DESC;
 --14. What is the total monthly repayment for all properties?
+SELECT SUM(CAST(Monthly_Repayment AS BIGINT)) AS Totalmonthlyrepayment 
+FROM [dbo].[Property_DATA]
 --15. What is the total monthly repayment per province?
+SELECT PROVINCE, SUM(CAST(Monthly_Repayment AS BIGINT)) AS Totalmonthlyrepayment
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
 --16. What is the total once-off cost for all properties?
+select * from [dbo].[Property_DATA];
+SELECT SUM(CAST(TOTAL_ONCE_OFF_COSTS AS BIGINT)) AS Totalonceoff
+FROM [dbo].[Property_DATA]
 --17. What is the total once-off cost per province?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT PROVINCE, SUM(CAST( TOTAL_ONCE_OFF_COSTS AS BIGINT)) AS TOTALONCEOFF
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE;
 --18. What is the total property value for Gauteng?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS TotalGautengValue
+FROM [dbo].[Property_DATA]
+WHERE province = 'Gauteng';
 --19. What is the total property value for properties priced above R4,000,000?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT PROVINCE, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS Totalproprtyvalue
+FROM [dbo].[Property_DATA]
+WHERE PROPERTY_PRICE > 4000000
+GROUP BY PROVINCE;
 --20. What is the total minimum gross monthly income required per province?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT PROVINCE, SUM(MIN_GROSS_MONTHLY_INCOME) AS TOTAL_MINI_GROSS_INCONE
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE;
 --SECTION 3 – AVG Aggregations (10 Questions)
 --21. What is the average property price overall?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT AVG(CAST(property_price AS BIGINT)) AS AverageGautengValue
+FROM [dbo].[Property_DATA]
+WHERE province = 'Gauteng';  
 --22. What is the average property price per province?
+SELECT * FROM [dbo].[Property_DATA];
+SELECT PROVINCE, AVG(CAST(PROPERTY_PRICE AS BIGINT)) AS Average
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY AVERAGE;
 --23. What is the average property price per city?
+SELECT CITY, AVG(CAST( PROPERTY_PRICE AS BIGINT)) AS AVERAGE
+FROM  [dbo].[Property_DATA]
+GROUP BY CITY 
 --24. What is the average number of bedrooms per province?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST(BEDROOMS AS BIGINT)) AS AVERAGEBEDROOMS
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY AVERAGEBEDROOMS;
 --25. What is the average number of bathrooms per province?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST(BATHROOMS AS BIGINT)) AS AVERAGEBATHROOMS
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY AVERAGEBATHROOMS;
 --26. What is the average floor size per province?
+SELECT * FROM  [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST(FLOOR_SIZE AS BIGINT)) AS AVERAGE_FLOORSIZE
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY AVERAGE_FLOORSIZE;
 --27. What is the average monthly repayment per province?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST(MONTHLY_REPAYMENT AS BIGINT)) AS AVERAGE_MONTHLY_REPAYMENT
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE;
 --28. What is the average once-off cost per province?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST( TOTAL_ONCE_OFF_COSTS AS BIGINT)) AS AVERAGE_ONCE_COSTS
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE;
 --29. What is the average minimum gross monthly income per province?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, AVG(CAST(MIN_GROSS_MONTHLY_INCOME AS BIGINT)) AS AVERAGE
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE;
 --30. What is the average property price for properties above R3,000,000?
 --SECTION 4 – GROUP BY + Filtering (10 Questions)
 --31. Which province has the highest average property price?
