@@ -147,14 +147,71 @@ SELECT PROVINCE, AVG(CAST(MIN_GROSS_MONTHLY_INCOME AS BIGINT)) AS AVERAGE
 FROM [dbo].[Property_DATA]
 GROUP BY PROVINCE;
 --30. What is the average property price for properties above R3,000,000?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT  AVG(CAST(PROPERTY_PRICE AS BIGINT)) AS AverageABOVE3000000
+FROM [dbo].[Property_DATA]
+WHERE CAST (PROPERTY_PRICE AS BIGINT) >3000000;
 --SECTION 4 – GROUP BY + Filtering (10 Questions)
 --31. Which province has the highest average property price?
+SELECT * FROM  [dbo].[Property_DATA]
+SELECT TOP 1 PROVINCE, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS HighestPropertyPrice
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY HighestPropertyPrice DESC;
 --32. Which province has the lowest average property price?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT TOP 1 PROVINCE, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS LowestAverage
+FROM [dbo].[Property_DATA]
+GROUP BY PROVINCE
+ORDER BY LowestAverage ASC;
 --33. Which city has the highest total property value?
+SELECT * FROM  [dbo].[Property_DATA]
+SELECT   CITY, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS highestvalue
+FROM [dbo].[Property_DATA]
+GROUP BY CITY
+ORDER BY  highestvalue DESC;
 --34. Which city has the lowest average property price?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT CITY, AVG(CAST(PROPERTY_PRICE AS BIGINT)) AS lowestaverage
+FROM [dbo].[Property_DATA]
+GROUP BY CITY
+ORDER BY  lowestaverage ASC;
 --35. How many properties per province are priced above R2,000,000?
+SELECT * FROM  [dbo].[Property_DATA]
+SELECT Province,COUNT(*) AS pricedabove2000000
+FROM [dbo].[Property_DATA]
+WHERE PROPERTY_PRICE > 2000000
+GROUP BY Province
+ORDER BY pricedabove2000000 DESC;
 --36. What is the average floor size per province for properties above R3,000,000?
+SELECT PROVINCE, AVG(CAST(FLOOR_SIZE AS BIGINT)) AS avgfloorsize
+FROM [dbo].[Property_DATA]
+WHERE PROPERTY_PRICE > 3000000
+GROUP BY PROVINCE
+ORDER BY avgfloorsize DESC;
 --37. What is the total property value per province for properties with 3 or more bedrooms?
+SELECT * FROM [dbo].[Property_DATA]
+SELECT PROVINCE, SUM(CAST(PROPERTY_PRICE AS BIGINT)) AS PROPERTYVALUE
+FROM [dbo].[Property_DATA]
+WHERE BEDROOMS > 3
+GROUP BY PROVINCE
+ORDER BY PROPERTYVALUE DESC;
 --38. What is the average monthly repayment per province for properties above R4,000,000?
+SELECT PROVINCE, ROUND(AVG(CAST(Monthly_Repayment AS FLOAT)), 2) AS AvgMonthlyRepayment
+FROM [dbo].[Property_DATA]
+WHERE PROPERTY_PRICE > 4000000
+GROUP BY PROVINCE
+ORDER BY AvgMonthlyRepayment DESC;
 --39. How many properties per city have parking for 2 or more cars?
+SELECT CITY, COUNT(*) AS PropertiesWith2OrMoreParking
+FROM [dbo].[Property_DATA]
+WHERE PARKING >= 2
+GROUP BY CITY
+ORDER BY PropertiesWith2OrMoreParking DESC;
 --40. What is the average minimum gross monthly income per province for properties above R5,000,000?
+SELECT PROVINCE, ROUND(AVG(CAST(Min_Gross_Monthly_Income AS FLOAT)), 2)
+AS AvgMinGrossIncome
+FROM [dbo].[Property_DATA]
+WHERE PROPERTY_PRICE > 5000000
+GROUP BY PROVINCE
+ORDER BY AvgMinGrossIncome DESC;
